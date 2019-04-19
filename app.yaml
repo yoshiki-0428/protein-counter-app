@@ -1,2 +1,2 @@
-runtime: node8
+runtime: nodejs8
 env: standard

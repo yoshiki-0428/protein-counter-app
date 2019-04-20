@@ -16,6 +16,9 @@ jobs:
       - run: apk add --no-cache nodejs npm yarn
       - run: yarn
       - run: yarn build
+      - run:
+        name: Decode dotenv file
+        command: echo $ENV_FILE | base64 --decode > .env
       - run: echo $GCLOUD_SERVICE_KEY > ${HOME}/gcloud-service-key.json
       - run: gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
       - run: gcloud app deploy --quiet --project protein-counter-app

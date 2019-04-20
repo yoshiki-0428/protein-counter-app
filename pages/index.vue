@@ -6,17 +6,29 @@
         このアプリはプロテインを継続するためのアプリです。<br>
         簡単な操作で毎日プロテインを愛飲しましょう！
       </h2>
-      <el-button @click="visible = true">Login</el-button>
+      <el-button @click="loginByGoogle()">Google Login</el-button>
     </div>
   </section>
 </template>
 
 <script>
 import Logo from '~/components/Logo.vue'
+import firebase from '~/plugins/firebase'
 
 export default {
   components: {
     Logo
+  },
+  data: () => {
+    return {
+      visible: false
+    }
+  },
+  methods: {
+    loginByGoogle: () => {
+      const provider = new firebase.auth.GoogleAuthProvider()
+      firebase.auth().signInWithRedirect(provider)
+    }
   }
 }
 </script>

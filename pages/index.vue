@@ -2,11 +2,30 @@
   <section class="container">
     <div>
       <logo/>
-      <h2 class="subtitle">
-        このアプリはプロテインを継続するためのアプリです。<br>
-        簡単な操作で毎日プロテインを愛飲しましょう！
-      </h2>
-      <el-button @click="loginByGoogle()">Google Login</el-button>
+      <!--<h3 class="subtitle">-->
+      <!--このアプリはプロテインを継続するためのアプリです。<br>-->
+      <!--簡単な操作で毎日プロテインを愛飲しましょう！-->
+      <!--</h3>-->
+      <div>
+        <el-button
+          class="el-button--medium"
+          @click="loginByGoogle()">
+          Google Login
+          <font-awesome-icon :icon="['fab', 'google']"/>
+        </el-button>
+        <el-button class="el-button--medium">
+          GitHub Login
+          <font-awesome-icon :icon="['fab', 'github']"/>
+        </el-button>
+        <el-button class="el-button--medium">
+          Twitter Login
+          <font-awesome-icon :icon="['fab', 'twitter']"/>
+        </el-button>
+        <el-button class="el-button--medium">
+          Facebook Login
+          <font-awesome-icon :icon="['fab', 'facebook']"/>
+        </el-button>
+      </div>
     </div>
   </section>
 </template>
@@ -27,7 +46,23 @@ export default {
   methods: {
     loginByGoogle: () => {
       const provider = new firebase.auth.GoogleAuthProvider()
-      firebase.auth().signInWithRedirect(provider)
+      firebase
+        .auth()
+        .signInWithPopup(provider)
+        .then(result => {
+          const user = result.user
+          console.log(user)
+        })
+        .catch(error => {
+          // Handle Errors here.
+          var errorCode = error.code
+          var errorMessage = error.message
+          // The email of the user's account used.
+          var email = error.email
+          // The firebase.auth.AuthCredential type that was used.
+          var credential = error.credential
+          console.log(error)
+        })
     }
   }
 }

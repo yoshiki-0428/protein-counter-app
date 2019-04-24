@@ -1,33 +1,24 @@
-<template>
-  <section class="container">
-    <div>
-      <logo/>
-      <!--<h3 class="subtitle">-->
-      <!--このアプリはプロテインを継続するためのアプリです。<br>-->
-      <!--簡単な操作で毎日プロテインを愛飲しましょう！-->
-      <!--</h3>-->
-      <div>
-        <el-button
-          class="el-button--medium"
-          @click="loginByGoogle()">
-          Google Login
-          <font-awesome-icon :icon="['fab', 'google']"/>
-        </el-button>
-        <el-button class="el-button--medium">
-          GitHub Login
-          <font-awesome-icon :icon="['fab', 'github']"/>
-        </el-button>
-        <el-button class="el-button--medium">
-          Twitter Login
-          <font-awesome-icon :icon="['fab', 'twitter']"/>
-        </el-button>
-        <el-button class="el-button--medium">
-          Facebook Login
-          <font-awesome-icon :icon="['fab', 'facebook']"/>
-        </el-button>
-      </div>
-    </div>
-  </section>
+<template lang="pug">
+  section.container
+    div
+      logo
+      // <h3 class="subtitle">
+      // このアプリはプロテインを継続するためのアプリです。<br>
+      // 簡単な操作で毎日プロテインを愛飲しましょう！
+      // </h3>
+      div
+        el-button.el-button--medium(@click='loginByGoogle()')
+          | Google Login
+          font-awesome-icon(:icon="['fab', 'google']")
+        el-button.el-button--medium
+          | GitHub Login
+          font-awesome-icon(:icon="['fab', 'github']")
+        el-button.el-button--medium
+          | Twitter Login
+          font-awesome-icon(:icon="['fab', 'twitter']")
+        el-button.el-button--medium
+          | Facebook Login
+          font-awesome-icon(:icon="['fab', 'facebook']")
 </template>
 
 <script>
@@ -45,6 +36,10 @@ export default {
   },
   methods: {
     loginByGoogle: () => {
+      console.log(process.env.APIKEY)
+      console.log(process.env.AUTHDOMAIN)
+      console.log(process.env.DATABASEURL)
+      console.log(process.env.PROJECTID)
       const provider = new firebase.auth.GoogleAuthProvider()
       firebase
         .auth()

@@ -40,6 +40,8 @@ export default {
       console.log(process.env.AUTHDOMAIN)
       console.log(process.env.DATABASEURL)
       console.log(process.env.PROJECTID)
+      console.log(process.env.STORAGEBUCKET)
+      console.log(process.env.MESSAGINGSENDERID)
       const provider = new firebase.auth.GoogleAuthProvider()
       firebase
         .auth()

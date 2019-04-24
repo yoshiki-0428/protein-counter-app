@@ -2,12 +2,12 @@ import firebase from 'firebase'
 
 if (!firebase.apps.length) {
   firebase.initializeApp({
-    apiKey: process.env.APIKEY,
-    authDomain: process.env.AUTHDOMAIN,
-    databaseURL: process.env.DATABASEURL,
-    projectId: process.env.PROJECTID,
-    storageBucket: process.env.STORAGEBUCKET,
-    messagingSenderId: process.env.MESSAGINGSENDERID
+    apiKey: 'AIzaSyA8R1eqtUtXxfiDXK9-TjCzNUIDVTxOIXo',
+    authDomain: 'protein-counter-app.firebaseapp.com',
+    databaseURL: 'https://protein-counter-app.firebaseio.com',
+    projectId: 'protein-counter-app',
+    storageBucket: 'protein-counter-app.appspot.com',
+    messagingSenderId: '459945928592'
   })
 }
 

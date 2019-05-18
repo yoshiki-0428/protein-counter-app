@@ -2,28 +2,24 @@
   section.container
     div
       logo
-      // <h3 class="subtitle">
-      // このアプリはプロテインを継続するためのアプリです。<br>
-      // 簡単な操作で毎日プロテインを愛飲しましょう！
-      // </h3>
-      div
-        el-button.el-button--medium(@click='loginByGoogle()')
+      .button-list
+        el-button.el-button--medium.margin-all(@click='loginByGoogle()')
           | Google Login
-          font-awesome-icon(:icon="['fab', 'google']")
-        el-button.el-button--medium
+          font-awesome-icon.margin-left(:icon="['fab', 'google']" )
+        el-button.el-button--medium.margin-all
           | GitHub Login
-          font-awesome-icon(:icon="['fab', 'github']")
-        el-button.el-button--medium
+          font-awesome-icon.margin-left(:icon="['fab', 'github']")
+        el-button.el-button--medium.margin-all
           | Twitter Login
-          font-awesome-icon(:icon="['fab', 'twitter']")
-        el-button.el-button--medium
+          font-awesome-icon.margin-left(:icon="['fab', 'twitter']")
+        el-button.el-button--medium.margin-all(@click='loginByFacebook(2)')
           | Facebook Login
-          font-awesome-icon(:icon="['fab', 'facebook']")
+          font-awesome-icon.margin-left(:icon="['fab', 'facebook']")
 </template>
 
 <script>
 import Logo from '~/components/Logo.vue'
-import firebase from '~/plugins/firebase'
+import auth from '~/plugins/auth'
 
 export default {
   components: {
@@ -34,32 +30,17 @@ export default {
       visible: false
     }
   },
+  beforeCreate() {
+    auth.onAuthStateChanged().then(value => {
+      console.log(value)
+    })
+  },
   methods: {
     loginByGoogle: () => {
-      console.log(process.env.APIKEY)
-      console.log(process.env.AUTHDOMAIN)
-      console.log(process.env.DATABASEURL)
-      console.log(process.env.PROJECTID)
-      console.log(process.env.STORAGEBUCKET)
-      console.log(process.env.MESSAGINGSENDERID)
-      const provider = new firebase.auth.GoogleAuthProvider()
-      firebase
-        .auth()
-        .signInWithPopup(provider)
-        .then(result => {
-          const user = result.user
-          console.log(user)
-        })
-        .catch(error => {
-          // Handle Errors here.
-          var errorCode = error.code
-          var errorMessage = error.message
-          // The email of the user's account used.
-          var email = error.email
-          // The firebase.auth.AuthCredential type that was used.
-          var credential = error.credential
-          console.log(error)
-        })
+      auth.onAuthGoogleLogin()
+    },
+    loginByFacebook: () => {
+      auth.onAuthFaceBookLogin()
     }
   }
 }
@@ -72,6 +53,19 @@ export default {
   justify-content: center;
   align-items: center;
   text-align: center;
+}
+
+.button-list {
+  margin-top: 10px;
+  display: inline-grid;
+}
+
+.margin-all {
+  margin: 5px;
+}
+
+.margin-left {
+  margin-left: 5px;
 }
 
 .title {

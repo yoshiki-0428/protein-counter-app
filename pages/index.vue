@@ -1,20 +1,24 @@
 <template lang="pug">
   section.container
-    div
+    .login-content
       logo
       .button-list
-        el-button.el-button--medium.margin-all(@click='loginByGoogle()')
-          | Google Login
-          font-awesome-icon.margin-left(:icon="['fab', 'google']" )
-        el-button.el-button--medium.margin-all
-          | GitHub Login
-          font-awesome-icon.margin-left(:icon="['fab', 'github']")
-        el-button.el-button--medium.margin-all
-          | Twitter Login
-          font-awesome-icon.margin-left(:icon="['fab', 'twitter']")
-        el-button.el-button--medium.margin-all(@click='loginByFacebook(2)')
-          | Facebook Login
-          font-awesome-icon.margin-left(:icon="['fab', 'facebook']")
+        el-button.el-button--medium.margin-all(@click='loginByGoogle()' round )
+          .english-font
+            | Google Login
+            font-awesome-icon.margin-left(:icon="['fab', 'google']" )
+        el-button.el-button--medium.margin-all(@click='loginByTwitter()' round)
+          .english-font
+            | Twitter Login
+            font-awesome-icon.margin-left(round :icon="['fab', 'twitter']")
+        el-button.el-button--medium.margin-all(@click='loginByFacebook()' round)
+          .english-font
+            | Facebook Login
+            font-awesome-icon.margin-left(:icon="['fab', 'facebook']")
+        el-button.el-button--medium.margin-all(@click='loginByGitHub()' round)
+          .english-font
+            | GitHub Login
+            font-awesome-icon.margin-left(:icon="['fab', 'github']")
 </template>
 
 <script>
@@ -41,18 +45,35 @@ export default {
     },
     loginByFacebook: () => {
       auth.onAuthFaceBookLogin()
+    },
+    loginByTwitter: () => {
+      auth.onAuthTwitterLogin()
+    },
+    loginByGitHub: () => {
+      auth.onAuthGitHubLogin()
     }
   }
 }
 </script>
 
 <style>
+.login-content {
+  display: grid;
+}
+
+.app-name {
+}
+
 .container {
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
+}
+
+.english-font {
+  font-size: 20px;
 }
 
 .button-list {

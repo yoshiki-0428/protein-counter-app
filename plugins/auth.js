@@ -15,7 +15,7 @@ class auth {
       firebase
         .auth()
         .signInWithPopup(provider)
-        .then(() => resolve(user))
+        .then(result => resolve(result))
         .catch(error => console.log(error))
     })
   }
@@ -26,7 +26,29 @@ class auth {
       firebase
         .auth()
         .signInWithPopup(provider)
-        .then(() => resolve(user))
+        .then(result => resolve(result))
+        .catch(error => console.log(error))
+    })
+  }
+
+  static onAuthTwitterLogin() {
+    const provider = new firebase.auth.TwitterAuthProvider()
+    return new Promise((resolve, reject) => {
+      firebase
+        .auth()
+        .signInWithPopup(provider)
+        .then(result => resolve(result))
+        .catch(error => console.log(error))
+    })
+  }
+
+  static onAuthGitHubLogin() {
+    const provider = new firebase.auth.GithubAuthProvider()
+    return new Promise((resolve, reject) => {
+      firebase
+        .auth()
+        .signInWithPopup(provider)
+        .then(result => resolve(result))
         .catch(error => console.log(error))
     })
   }

@@ -3,10 +3,9 @@ jobs:
   build:
     working_directory: ~/dist
     docker:
-      - image: circleci/node:8.10.0
+      - image: circleci/node:10.12.0
     steps:
       - checkout
-      - run: echo 1 # ここにあなたのプロジェクトにあわせたテストを記述
   deploy:
     working_directory: ~/dist
     docker:
@@ -16,8 +15,7 @@ jobs:
       - run: apk add --no-cache nodejs npm yarn
       - run: yarn
       - run: yarn build
-      - run: echo $ENV_FILE | base64 -d > ~/.env
-      - run: cat ~/.env
+      - run: ./node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN
       - run: echo $GCLOUD_SERVICE_KEY > ${HOME}/gcloud-service-key.json
       - run: gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
       - run: gcloud app deploy --quiet --project protein-counter-app
@@ -26,7 +24,6 @@ workflows:
   version: 2
   main:
     jobs:
-#      - build # プロジェクトにあわせたテストを記述した場合はここのコメントアウトを外す
       - deploy:
           filters:
             branches:

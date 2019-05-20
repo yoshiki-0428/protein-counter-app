@@ -3,19 +3,19 @@
     .login-content
       logo
       .button-list
-        el-button.el-button--medium.margin-all(@click='loginByGoogle()' round )
+        el-button.el-button--medium.margin-all(@click='auth.onAuthByProvider(new firebase.auth.GoogleAuthProvider(), success, failed)' round )
           .english-font
             | Google Login
             font-awesome-icon.margin-left(:icon="['fab', 'google']" )
-        el-button.el-button--medium.margin-all(@click='loginByTwitter()' round)
+        el-button.el-button--medium.margin-all(@click='auth.onAuthByProvider(new firebase.auth.TwitterAuthProvider(), success, failed)' round)
           .english-font
             | Twitter Login
             font-awesome-icon.margin-left(round :icon="['fab', 'twitter']")
-        el-button.el-button--medium.margin-all(@click='loginByFacebook()' round)
+        el-button.el-button--medium.margin-all(@click='auth.onAuthByProvider(new firebase.auth.FacebookAuthProvider(), success, failed)' round)
           .english-font
             | Facebook Login
             font-awesome-icon.margin-left(:icon="['fab', 'facebook']")
-        el-button.el-button--medium.margin-all(@click='loginByGitHub()' round)
+        el-button.el-button--medium.margin-all(@click='auth.onAuthByProvider(new firebase.auth.GithubAuthProvider(), success, failed)' round)
           .english-font
             | GitHub Login
             font-awesome-icon.margin-left(:icon="['fab', 'github']")
@@ -24,6 +24,7 @@
 <script>
 import Logo from '~/components/Logo.vue'
 import auth from '~/plugins/auth'
+import firebase from '~/plugins/firebase'
 
 export default {
   components: {
@@ -31,7 +32,9 @@ export default {
   },
   data: () => {
     return {
-      visible: false
+      visible: false,
+      auth: auth,
+      firebase: firebase
     }
   },
   beforeCreate() {
@@ -40,74 +43,58 @@ export default {
     })
   },
   methods: {
-    loginByGoogle: () => {
-      auth.onAuthGoogleLogin()
+    success(result) {
+      console.log(result)
+      this.$router.push('top')
+      this.$notify({
+        title: 'Success',
+        message: 'ログインに成功しました',
+        type: 'success',
+        position: 'bottom'
+      })
     },
-    loginByFacebook: () => {
-      auth.onAuthFaceBookLogin()
-    },
-    loginByTwitter: () => {
-      auth.onAuthTwitterLogin()
-    },
-    loginByGitHub: () => {
-      auth.onAuthGitHubLogin()
+    failed(error) {
+      console.log(error)
+      this.$notify({
+        title: 'Error',
+        message: error.message,
+        type: 'error',
+        position: 'bottom'
+      })
     }
   }
 }
 </script>
 
-<style>
-.login-content {
-  display: grid;
-}
+<style lang="sass">
+.login-content
+  display: grid
 
-.app-name {
-}
+.el-button:hover
+  opacity: 0.4
+  transform: scale(2, 2)
+  transition: 1s
 
-.container {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
+.container
+  min-height: 100vh
+  display: flex
+  justify-content: center
+  align-items: center
+  text-align: center
 
-.english-font {
-  font-size: 20px;
-}
+.english-font
+  font-size: 20px
 
-.button-list {
-  margin-top: 10px;
-  display: inline-grid;
-}
+.button-list
+  margin-top: 10px
+  display: inline-grid
 
-.margin-all {
-  margin: 5px;
-}
+.margin-all
+  margin: 5px
 
-.margin-left {
-  margin-left: 5px;
-}
+.margin-left
+  margin-left: 5px
 
-.title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
-}
+.links
+  padding-top: 15px
 </style>

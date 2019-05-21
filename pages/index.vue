@@ -1,6 +1,7 @@
 <template lang="pug">
   section.container
     .login-content
+      video-back
       logo
       .button-list
         el-button.el-button--medium.margin-all(@click='auth.onAuthByProvider(new firebase.auth.GoogleAuthProvider(), success, failed)' round )
@@ -23,16 +24,17 @@
 
 <script>
 import Logo from '~/components/Logo.vue'
+import VideoBack from '~/components/VideoBack.vue'
 import auth from '~/plugins/auth'
 import firebase from '~/plugins/firebase'
 
 export default {
   components: {
-    Logo
+    Logo,
+    VideoBack
   },
   data: () => {
     return {
-      visible: false,
       auth: auth,
       firebase: firebase
     }
@@ -66,12 +68,11 @@ export default {
 }
 </script>
 
-<style lang="sass">
+<style lang="sass" scoped>
 .login-content
   display: grid
 
 .el-button:hover
-  opacity: 0.4
   transform: scale(2, 2)
   transition: 1s
 
@@ -83,18 +84,16 @@ export default {
   text-align: center
 
 .english-font
-  font-size: 20px
+  font-size: 18px
+  font-family: Bungee, serif
 
 .button-list
   margin-top: 10px
   display: inline-grid
 
 .margin-all
-  margin: 5px
+  margin: 8px
 
 .margin-left
   margin-left: 5px
-
-.links
-  padding-top: 15px
 </style>

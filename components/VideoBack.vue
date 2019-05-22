@@ -2,15 +2,28 @@
   video.bg-video(
     muted
     autoplay
+    playsinline
     loop
+    :poster="img"
   )
-    source(src="@/assets/title_back.mp4")
-    source(src="@/assets/title_back.jpg")
+    source(:src="mp4")
+    source(:src="web")
 </template>
 
 <script>
+import videoBackImg from '../static/title_back.jpg'
+import videoBackMp4 from '../static/title_back.mp4'
+import videoBackWeb from '../static/title_back.webm'
+
 export default {
-  name: 'VideoBack'
+  name: 'VideoBack',
+  data: () => {
+    return {
+      img: videoBackImg,
+      mp4: videoBackMp4,
+      web: videoBackWeb
+    }
+  }
 }
 </script>
 

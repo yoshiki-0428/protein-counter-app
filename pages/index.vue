@@ -4,7 +4,7 @@
       video-back
       logo
       .button-list
-        el-button.el-button--medium.margin-all(@click='auth.onAuthByProvider(new firebase.auth.GoogleAuthProvider(), success, failed)' round )
+        el-button.el-button--medium.margin-all(@click='auth.onAuthByProvider(new firebase.auth.GoogleAuthProvider(), success, failed)' round)
           .english-font
             | Google Login
             font-awesome-icon.margin-left(:icon="['fab', 'google']" )
@@ -75,17 +75,6 @@ export default {
 .el-button:hover
   transform: scale(2, 2)
   transition: 1s
-
-.container
-  min-height: 100vh
-  display: flex
-  justify-content: center
-  align-items: center
-  text-align: center
-
-.english-font
-  font-size: 18px
-  font-family: Bungee, serif
 
 .button-list
   margin-top: 10px

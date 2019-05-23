@@ -4,7 +4,6 @@
     autoplay
     playsinline
     loop
-    :poster="img"
   )
     source(:src="mp4")
     source(:src="web")
@@ -16,7 +15,6 @@ import videoBackMp4 from '../static/title_back.mp4'
 import videoBackWeb from '../static/title_back.webm'
 
 export default {
-  name: 'VideoBack',
   data: () => {
     return {
       img: videoBackImg,
@@ -41,4 +39,20 @@ video
   height: auto
   z-index: -2
   background-size: cover
+
+.bg-video
+  animation: fadeIn 1s ease 0s 1 normal
+  -webkit-animation: fadeIn 1s ease 0s 1 normal
+
+@keyframes fadeIn
+  0%
+    opacity: 0
+  100%
+    opacity: 1
+
+@-webkit-keyframes fadeIn
+  0%
+    opacity: 0
+  100%
+    opacity: 1
 </style>

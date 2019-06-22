@@ -27,6 +27,7 @@ import Logo from '~/components/Logo.vue'
 import VideoBack from '~/components/VideoBack.vue'
 import auth from '~/plugins/auth'
 import firebase from '~/plugins/firebase'
+import { mapActions, mapState, mapGetters } from 'vuex'
 
 export default {
   components: {
@@ -39,12 +40,17 @@ export default {
       firebase: firebase
     }
   },
-  beforeCreate() {
-    auth.onAuthStateChanged().then(value => {
-      console.log(value)
+  computed: {
+    ...mapState(['user']),
+    ...mapGetters(['isAuthenticated'])
+  },
+  mounted() {
+    auth.onAuthStateChanged().then(user => {
+      this.setUser(user)
     })
   },
   methods: {
+    ...mapActions(['setUser']),
     success(result) {
       console.log(result)
       this.$router.push('top')

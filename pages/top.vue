@@ -1,12 +1,29 @@
 <template lang="pug">
-  .container
-    .japanese-font 〇〇さん、プロテインカウンターへようこそ
-    .japanese-font さっそく下のボタンを押してプロテインの記録をしてみましょう
-    img.drink_button(src="../static/drink_logo.png")
+  auth-page
+    .container
+      .japanese-font {{ user.displayName }}さん、プロテインカウンターへようこそ
+      .japanese-font さっそく下のボタンを押してプロテインの記録をしてみましょう
+      img.drink_button(src="../static/drink_logo.png" disabled)
 </template>
 
 <script>
-export default {}
+import authPage from '../components/AuthPage'
+import { mapState } from 'vuex'
+
+export default {
+  components: {
+    authPage
+  },
+  data: () => {
+    return {
+      isDisabled: false
+    }
+  },
+  computed: {
+    ...mapState(['user'])
+  },
+  methods: {}
+}
 </script>
 
 <style lang="sass" scoped>

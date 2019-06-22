@@ -1,4 +1,4 @@
-FROM node:lts-alpine
+FROM node:11.15-alpine
 
 # 静的コンテンツを配信するシンプルな http サーバをインストールする
 RUN npm install -g http-server

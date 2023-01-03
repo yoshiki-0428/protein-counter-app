@@ -24,7 +24,7 @@
     "element-ui": "^2.7.2",
     "firebase": "^5.10.0",
     "node-sass": "^4.11.0",
-    "nuxt": "^2.0.0",
+    "nuxt": "^2.15.8",
     "pug": "^2.0.3",
     "pug-loader": "^2.4.0",
     "pug-plain-loader": "^1.0.0",
